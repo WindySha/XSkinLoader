@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">XSkinLoader-sample</string>
+
+    <string name="change_skin_text">点击换肤</string>
+    <string name="recovery_skin_text">点击恢复</string>
+
+</resources>

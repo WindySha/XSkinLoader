@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/android/skin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/change_skin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickButton"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/change_skin_text"/>
+    <Button
+        android:id="@+id/recovery_skin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickButton"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/recovery_skin_text"/>
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        skin:attrs="background"
+        skin:enable="true"
+        style="@style/MyTextViewStyle"
+        android:background="@drawable/custom_background"
+        android:text="Hello World!"/>
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/my_imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            skin:enable="true"
+            />
+
+        <ImageView
+            android:id="@+id/my_bg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            skin:enable="true"
+            android:src="@drawable/image_border"/>
+
+    </FrameLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_textView_1"
+        android:text="Hello World!"
+        skin:enable="true"
+        style="@style/MyTextViewStyle"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp" />
+
+    <com.wind.me.xskinloader_sample.CustomTitleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        skin:enable="true"
+        app:titleText="3712"
+        app:titleTextColor="@color/myTextColor"
+        app:titleTextSize="40sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_textView"
+        android:text="Hello World!"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="10dp" />
+
+    <ProgressBar
+        android:id="@+id/my_progress_bar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:indeterminate="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="10dp"
+        skin:enable="true"
+        style="@style/progressBarStyle"
+        android:max="10000"/>
+
+</LinearLayout>
