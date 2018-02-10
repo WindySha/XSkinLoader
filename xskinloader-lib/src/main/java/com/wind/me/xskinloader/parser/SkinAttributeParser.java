@@ -25,7 +25,7 @@ public class SkinAttributeParser {
 
     private static final String TAG = SkinAttributeParser.class.getSimpleName();
 
-    public static final HashMap<String, SkinAttr> parseSkinAttr(AttributeSet attrs, View view, String[] specifiedAttrList) {
+    public static HashMap<String, SkinAttr> parseSkinAttr(AttributeSet attrs, View view, String[] specifiedAttrList) {
         if (view == null) {
             return null;
         }
@@ -79,7 +79,7 @@ public class SkinAttributeParser {
         return viewAttrs;
     }
 
-    public static final SkinAttr parseSkinAttr(Context context, String attrName, int resId) {
+    public static SkinAttr parseSkinAttr(Context context, String attrName, int resId) {
         if (context == null) {
             return null;
         }

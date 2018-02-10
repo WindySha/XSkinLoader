@@ -17,7 +17,7 @@ import java.util.Map;
  */
 
 public class StyleParserFactory {
-    static List<ISkinStyleParser> sStyleParserArray = new ArrayList<>();
+    private static List<ISkinStyleParser> sStyleParserArray = new ArrayList<>();
 
     static {
         addStyleParser(new TextViewTextColorStyleParser());
