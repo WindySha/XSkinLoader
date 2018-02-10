@@ -4,7 +4,8 @@ XSkinLoader的使用方式特别简单，对代码的侵入性很低，需要换
 ```
     SkinInflaterFactory.setFactory(this);
 ```
-其他用法跟其他换肤框架基本相同，先在Application中初始化，然后在相关xml中加上`skin:enable="true"`， 下面详细介绍一下。
+用法跟其他换肤框架基本相同，先在Application中初始化，然后在相关xml中加上`skin:enable="true"`即可，具体用法如下：
+
 ### **初始化**
 首先在`Application`的`onCreate`中进行初始化：
 ```
