@@ -1,4 +1,7 @@
 # XSkinLoader
+
+源码分析，请参考我的个人博客：[侵入性低扩展性强的Android换肤框架XSkinLoader的用法及原理][1]
+
 ## **XSkinLoader的使用方法**
 XSkinLoader的使用方式特别简单，对代码的侵入性很低，需要换肤的Activity中只用在调用一行代码即可：
 ```
@@ -109,3 +112,5 @@ static {
         StyleParserFactory.addStyleParser(new ViewBackgroundStyleParser());
     }
 ```
+
+[1]: https://windysha.github.io/2018/02/10/%E4%BE%B5%E5%85%A5%E6%80%A7%E4%BD%8E%E6%89%A9%E5%B1%95%E6%80%A7%E5%BC%BA%E7%9A%84Android%E6%8D%A2%E8%82%A4%E6%A1%86%E6%9E%B6XSkinLoader%E7%9A%84%E7%94%A8%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86/
