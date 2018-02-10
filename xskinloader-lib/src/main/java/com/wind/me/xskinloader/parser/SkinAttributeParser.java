@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.wind.me.xskinloader.StyleParserFactory;
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.entity.SkinConfig;
 import com.wind.me.xskinloader.SkinResDeployerFactory;
@@ -35,13 +36,9 @@ public class SkinAttributeParser {
         //先处理style类型, 避免布局中定义的属性被style中定义的属性覆盖
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
             String attrName = attrs.getAttributeName(i);
-            //处理TextView控件中设置的style属性
-            if (TextView.class.isAssignableFrom(view.getClass()) && "style".equals(attrName)) {
-                XmlStyleParser.parseTextViewStyles(context, attrs, viewAttrs, specifiedAttrList);
-            }
-            //处理ProgressBar控件中设置的style属性
-            if (ProgressBar.class.isAssignableFrom(view.getClass()) && "style".equals(attrName)) {
-                XmlStyleParser.parseProgressBarStyle(context, attrs, viewAttrs, specifiedAttrList);
+            //处理控件中设置的style属性
+            if ("style".equals(attrName)) {
+                StyleParserFactory.parseStyle(view, attrs, viewAttrs, specifiedAttrList);
             }
         }
 

@@ -16,6 +16,7 @@
     <style name="MyTextViewStyle">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/myTextColor</item>
+        <item name="android:background">@color/activityBackgroundColor</item>
     </style>
 
     <style name="progressBarStyle">

@@ -1,7 +1,9 @@
 package com.wind.me.xskinloader_sample;
 
 import android.app.Application;
+import android.view.LayoutInflater;
 
+import com.wind.me.xskinloader.SkinInflaterFactory;
 import com.wind.me.xskinloader.SkinManager;
 
 /**
@@ -13,7 +15,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        DeployRegister.init();
+        ExtraAttrRegister.init();
+        SkinInflaterFactory.setFactory(LayoutInflater.from(this));  // for skin change
         SkinManager.get().init(this);
     }
 }
