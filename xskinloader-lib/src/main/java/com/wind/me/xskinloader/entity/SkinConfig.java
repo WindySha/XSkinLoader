@@ -18,7 +18,7 @@ public class SkinConfig {
     public static final String SKIN_APK_SUFFIX = ".skin";
     public static final String PREF_CUSTOM_SKIN_PATH = "music_skin_custom_path";
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
 
     /**

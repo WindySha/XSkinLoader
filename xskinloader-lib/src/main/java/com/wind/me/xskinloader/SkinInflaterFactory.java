@@ -51,7 +51,9 @@ public class SkinInflaterFactory implements Factory {
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
-        Log.e(TAG, "onCreateView(), create view name="+name+"  ");
+        if (SkinConfig.DEBUG) {
+            Log.d(TAG, "SkinInflaterFactory onCreateView(), create view name="+name+"  ");
+        }
         View view = null;
         if (mViewCreateFactory != null) {
             //给框架外提供创建View的机会
