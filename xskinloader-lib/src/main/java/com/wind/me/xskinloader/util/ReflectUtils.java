@@ -254,4 +254,53 @@ public class ReflectUtils {
             return findField(base, name);
         }
     }
+
+    //表示Field或者Class是编译器自动生成的
+    private static final int SYNTHETIC = 0x00001000;
+    //表示Field是final的
+    private static final int FINAL = 0x00000010;
+    //内部类持有的外部类对象一定有这两个属性
+    private static final int SYNTHETIC_AND_FINAL = SYNTHETIC | FINAL;
+
+    private static boolean checkModifier(int mod) {
+        return (mod & SYNTHETIC_AND_FINAL) == SYNTHETIC_AND_FINAL;
+    }
+
+    //获取内部类实例持有的外部类对象
+    public static <T> T getExternalField(Object innerObj) {
+        return getExternalField(innerObj, null);
+    }
+
+    /**
+     * 内部类持有的外部类对象的形式为：
+     *  final Outer this$0;
+     *    flags: ACC_FINAL, ACC_SYNTHETIC
+     * 参考：https://www.jianshu.com/p/9335c15c43cf
+     * And：https://www.2cto.com/kf/201402/281879.html
+     * @param innerObj 内部类对象
+     * @param name 内部类持有的外部类名称，默认是"this$0"
+     * @return 内部类持有的外部类对象
+     */
+    private static <T> T getExternalField(Object innerObj, String name) {
+        Class clazz = innerObj.getClass();
+        if (name == null || name.isEmpty()) {
+            name = "this$0";
+        }
+        Field field;
+        try {
+            field = clazz.getDeclaredField(name);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return null;
+        }
+        field.setAccessible(true);
+        if (checkModifier(field.getModifiers())) {
+            try {
+                return (T)field.get(innerObj);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return getExternalField(innerObj, name + "$");
+    }
 }

@@ -1,5 +1,6 @@
 package com.wind.me.xskinloader.skinDeployer;
 
+import android.os.Build;
 import android.view.View;
 import android.view.Window;
 
@@ -17,7 +18,14 @@ public class ActivityStatusBarColorResDeployer implements ISkinResDeployer {
     @Override
     public void deploy(View view, SkinAttr skinAttr, ISkinResourceManager resource) {
         //the view is the window's DecorView
-        Window window = (Window) ReflectUtils.getField(view, "mWindow");
+        Window window;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            //API23以上，DecorView独立成一个类，并持有mWindow对象
+            window = (Window) ReflectUtils.getField(view, "mWindow");
+        } else {
+            //API23以下，DecorView是PhoneWindow的内部类，隐式持有PhoneWindow对象
+            window = ReflectUtils.getExternalField(view);
+        }
         if (window == null) {
             throw new IllegalArgumentException("view is not a DecorView, cannot get the window");
         }
