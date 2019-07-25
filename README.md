@@ -1,27 +1,48 @@
-# XSkinLoader
+# What is XSkinLoader
+XSkinLoader是Android上即时换肤框架。能够动态加载Apk文件中的资源文件，实现即时换肤。
+# 引用
+代码已经上传到Jcenter
+gradle: 
+```
+implementation 'com.windysha.xskinloader:xskinloader:0.1.0'
+```
+maven: 
+```
+<dependency>
+	<groupId>com.windysha.xskinloader</groupId>
+	<artifactId>xskinloader</artifactId>
+	<version>0.1.0</version>
+	<type>pom</type>
+</dependency>
+```
 
-源码分析，请参考我的个人博客：[侵入性低扩展性强的Android换肤框架XSkinLoader的用法及原理][1]
-
-## **XSkinLoader的使用方法**
-XSkinLoader的使用方式特别简单，对代码的侵入性很低，需要换肤的Activity中只用在调用一行代码即可：
+# 使用
+## 加载资源Apk
+只需要将资源Apk拷贝到sdcard下面，调用loadSkin进行加载：
+```
+String skinApkPath = "mnt/sdcard/skin.apk";
+SkinManager.get().loadSkin(skinApkPath);
+```
+如果需要恢复到默认皮肤（使用宿主Apk资源），调用restoreToDefaultSkin()即可：
+```
+SkinManager.get().restoreToDefaultSkin();
+```
+## Activity中布局文件换肤
+对于需要换肤的Activity，在Activity的setContentView方法调用之前，设置其LayoutInflater的Factory接口：
 ```
     SkinInflaterFactory.setFactory(this);
 ```
-用法跟其他换肤框架基本相同，先在Application中初始化，然后在相关xml中加上`skin:enable="true"`即可，具体用法如下：
+这样，使用Activity的LayoutInflater加载的xml布局就可以支持换肤了。
 
-### **初始化**
-首先在`Application`的`onCreate`中进行初始化：
-```
-        SkinManager.get().init(this);
-```
-如果代码中需要经常使用Application Context的LayoutInflater加载View，最好同时加上这样一行代码：
-```
-        SkinInflaterFactory.setFactory(LayoutInflater.from(this));  // for skin change
-        SkinManager.get().init(this);
-```
-如此，使用LayoutInflater.from(context.getApplicationContext()).inflate()加载的view也是可以换肤的
+## 设置Application的LayoutInflater
 
-### **XML换肤**
+如果使用Application Context的LayoutInflater加载View也需要换肤，在Application的onCreate中加上这样一行代码：
+```
+        SkinInflaterFactory.setFactory(LayoutInflater.from(this));
+```
+如此，使用LayoutInflater.from(context.getApplicationContext()).inflate()加载的view也是可以换肤。
+
+## **XML换肤**
 xml布局中的View需要换肤的，只需要在布局文件中相关View标签下添加`skin:enable="true"`即可,例如：
 ```
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -60,7 +81,7 @@ xml布局中的View需要换肤的，只需要在布局文件中相关View标签
     ...
 ``` 
 
-### **xml中指定换肤属性**
+## **xml中指定换肤属性**
 xml中假如出现了多个可换肤属性，但只需要换其中部分属性，而不是全部属性，比如：
 ```
 <Button
@@ -90,7 +111,7 @@ xml中假如出现了多个可换肤属性，但只需要换其中部分属性�
 ```
 其实，大多数情况下并不用在Xml中加此属性来控制，如若不想此属性换肤，也可以在相应的皮肤apk中去掉此属性指定的资源。
 
-### **新增换肤属性**
+## **新增换肤属性**
 对已经成型的大型项目来说，XSkinLoader中提供的换肤属性是不够用的，需要额外增加的换肤属性该怎么办？
 在sample中写好了相应的模板，具体参考ExtraAttrRegister.java
 ```
@@ -103,7 +124,7 @@ public static final String CUSTIOM_VIEW_TEXT_COLOR = "titleTextColor";
     }
 ```
 
-### **新增style中的换肤属性**
+## **新增style中的换肤属性**
 假如style中的换肤属性不够用，需要新增，该怎么办？
 sample中也写了一个模板，在ExtraAttrRegister.java中:
 ```
@@ -112,7 +133,9 @@ static {
         StyleParserFactory.addStyleParser(new ViewBackgroundStyleParser());
     }
 ```
-## License
+# 源码分析
+请参考我的个人博客：[侵入性低扩展性强的Android换肤框架XSkinLoader的用法及原理][1]
+# License
 ```
 Copyright 2018 Windy
 
