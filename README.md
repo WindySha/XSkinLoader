@@ -1,7 +1,7 @@
 # What is XSkinLoader
 XSkinLoader是Android上即时换肤框架。能够动态加载Apk文件中的资源文件，实现即时换肤。
 # 引用
-代码已经上传到Jcenter
+代码已经上传到Jcenter  
 gradle: 
 ```
 implementation 'com.windysha.xskinloader:xskinloader:0.1.0'
