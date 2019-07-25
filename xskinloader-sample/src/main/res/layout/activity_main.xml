@@ -7,22 +7,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/change_skin_button"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="clickButton"
-        android:layout_marginStart="100dp"
         android:layout_marginTop="10dp"
-        android:text="@string/change_skin_text"/>
-    <Button
-        android:id="@+id/recovery_skin_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickButton"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/recovery_skin_text"/>
+        >
+
+        <Button
+            android:id="@+id/change_skin_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="clickButton"
+            android:layout_marginStart="100dp"
+            android:text="@string/change_skin_text"/>
+
+        <Button
+            android:id="@+id/recovery_skin_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="250dp"
+            android:onClick="clickButton"
+            android:text="@string/recovery_skin_text" />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="100dp"

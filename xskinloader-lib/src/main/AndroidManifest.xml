@@ -1,2 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wind.me.xskinloader" />
+    package="com.wind.me.xskinloader">
+
+    <application>
+        <provider
+            android:name=".SkinLoaderInitializer"
+            android:authorities="${applicationId}.xskinloader-process"
+            android:exported="false"
+            android:multiprocess="true" />
+    </application>
+</manifest>

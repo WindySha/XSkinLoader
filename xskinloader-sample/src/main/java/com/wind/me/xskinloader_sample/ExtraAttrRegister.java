@@ -14,15 +14,12 @@ public class ExtraAttrRegister {
 
     public static final String CUSTIOM_VIEW_TEXT_COLOR = "titleTextColor";
 
-    static {
+    public static void init() {
         //增加自定义控件的自定义属性的换肤支持
         SkinResDeployerFactory.registerDeployer(CUSTIOM_VIEW_TEXT_COLOR, new CustomViewTextColorResDeployer());
 
         //增加xml里的style中指定的View background属性换肤
         StyleParserFactory.addStyleParser(new ViewBackgroundStyleParser());
     }
-
-    //仅仅为了使类的静态方法被加载而已
-    public static void init() {}
 
 }

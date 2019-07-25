@@ -3,6 +3,7 @@ package com.wind.me.xskinloader.skinDeployer;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.entity.SkinConfig;
@@ -30,7 +31,12 @@ public class ActivityStatusBarColorResDeployer implements ISkinResDeployer {
             throw new IllegalArgumentException("view is not a DecorView, cannot get the window");
         }
         if (SkinConfig.RES_TYPE_NAME_COLOR.equals(skinAttr.attrValueTypeName)) {
-            window.setStatusBarColor(resource.getColor(skinAttr.attrValueRefId));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(resource.getColor(skinAttr.attrValueRefId));
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                //4.4及其以上
+                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            }
         }
     }
 }

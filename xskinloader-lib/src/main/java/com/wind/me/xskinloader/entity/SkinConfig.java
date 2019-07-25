@@ -31,29 +31,25 @@ public class SkinConfig {
      */
     public static final String RES_TYPE_NAME_DRAWABLE = "drawable";
 
-    public static final String PREFERENCE_NAME = "music_skin_pref";
+    public static final String PREFERENCE_NAME = "xskin_loader_pref";
 
 
-    public static String getCustomSkinPath(Context context) {
+    public static String getSkinApkPath(Context context) {
         return getString(context, PREF_CUSTOM_SKIN_PATH, null);
     }
 
-    public static void saveSkinPath(Context context, String path) {
+    public static void saveSkinApkPath(Context context, String path) {
         putString(context, PREF_CUSTOM_SKIN_PATH, path);
     }
 
-    public static boolean isDefaultSkin(Context context) {
-        return getCustomSkinPath(context) == null;
-    }
-
-    public static boolean putString(Context context, String key, String value) {
+    private static boolean putString(Context context, String key, String value) {
         SharedPreferences settings = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(key, value);
         return editor.commit();
     }
 
-    public static String getString(Context context, String key, String defaultValue) {
+    private static String getString(Context context, String key, String defaultValue) {
         SharedPreferences settings = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         return settings.getString(key, defaultValue);
     }

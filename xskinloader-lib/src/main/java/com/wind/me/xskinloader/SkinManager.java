@@ -1,5 +1,6 @@
 package com.wind.me.xskinloader;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.res.Resources;
@@ -7,11 +8,11 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
 import com.wind.me.xskinloader.entity.SkinAttr;
-import com.wind.me.xskinloader.entity.SkinConfig;
 import com.wind.me.xskinloader.impl.SkinResourceManagerImpl;
 import com.wind.me.xskinloader.parser.SkinAttributeParser;
 import com.wind.me.xskinloader.skinInterface.ISkinResDeployer;
@@ -27,10 +28,12 @@ import java.util.WeakHashMap;
 public class SkinManager {
 
     private static final String TAG = SkinManager.class.getSimpleName();
+    @SuppressLint("StaticFieldLeak")
     private static SkinManager sInstance;
     private Context mContext;
     private String mPluginSkinPath;
     private ISkinResourceManager mSkinResourceManager;
+    private boolean hasInited = false;
 
     //使用这个map保存所有需要换肤的view和其对应的换肤属性及资源
     //使用WeakHashMap两个作用，1.避免内存泄漏，2.避免重复的view被添加
@@ -45,16 +48,19 @@ public class SkinManager {
         return sInstance;
     }
 
-    //在Application的onCreate中初始化
+    // 在provider中自动初始化，不用手动调用
     @MainThread
     public void init(Context context) {
+        if (hasInited) {
+            Log.w(TAG, " SkinManager has been inited, don't init again !!");
+            return;
+        }
+        hasInited = true;
         mContext = context.getApplicationContext();
         mSkinResourceManager = new SkinResourceManagerImpl(mContext, null, null);
-        load();
     }
 
     public void restoreToDefaultSkin() {
-        SkinConfig.saveSkinPath(mContext, null);
         mSkinResourceManager.setPluginResourcesAndPkgName(null, null);
         notifySkinChanged();
     }
@@ -62,9 +68,10 @@ public class SkinManager {
     /**
      * 加载已经用户默认设置的皮肤资源
      */
-    public void load() {
-        String skinApkPath = SkinConfig.getCustomSkinPath(mContext);
-        if (TextUtils.isEmpty(skinApkPath)) {
+    public void loadSkin(String skinApkPath) {
+        if (TextUtils.isEmpty(skinApkPath) || !(new File(skinApkPath)).exists()) {
+            Log.w(TAG, " Try to load skin apk, but file is not exist, file path -->  " + skinApkPath +
+                    " So, restore to default skin.");
             restoreToDefaultSkin();
         } else {
             loadNewSkin(skinApkPath);
@@ -77,7 +84,7 @@ public class SkinManager {
      * @param skinApkPath 新皮肤路径
      * @return true 加载新皮肤成功 false 加载失败
      */
-    public boolean loadNewSkin(String skinApkPath) {
+    private boolean loadNewSkin(String skinApkPath) {
         return doNewSkinLoad(skinApkPath);
     }
 
@@ -158,8 +165,6 @@ public class SkinManager {
         }
 
         mSkinResourceManager.setPluginResourcesAndPkgName(pluginResources, skinPackageName);
-
-        SkinConfig.saveSkinPath(mContext, skinApkPath);
 
         mPluginSkinPath = skinApkPath;
 

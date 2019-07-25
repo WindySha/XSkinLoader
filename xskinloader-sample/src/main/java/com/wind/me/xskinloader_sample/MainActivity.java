@@ -1,10 +1,8 @@
 package com.wind.me.xskinloader_sample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        // 实现activity中xml布局中的换肤，一定要在setContentView之前执行
         SkinInflaterFactory.setFactory(this);
 
         SkinManager.get().setWindowStatusBarColor(this.getWindow(), R.color.statusBarColor);
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         SkinManager.get().setImageDrawable(mImageView, R.drawable.my_image);
         SkinManager.get().setTextViewColor(mTextView, R.color.myTextColor);
     }
-
 
     //相应按钮点击事件
     public void clickButton(View v) {
@@ -55,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
         String savefileName = "/skin1.skin";
         String asset_dir = "skins/xskinloader-skin-apk-debug.apk";
         File file = new File(saveDir + File.separator + savefileName);
-//        if (!file.exists()) {
+        if (!file.exists()) {
             AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
-//        }
-        SkinManager.get().loadNewSkin(file.getAbsolutePath());
+        }
+        SkinManager.get().loadSkin(file.getAbsolutePath());
     }
 
     private void restoreDefaultSkin() {
