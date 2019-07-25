@@ -112,5 +112,19 @@ static {
         StyleParserFactory.addStyleParser(new ViewBackgroundStyleParser());
     }
 ```
+## License
+Copyright 2018 Windy
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 [1]: https://windysha.github.io/2018/02/10/%E4%BE%B5%E5%85%A5%E6%80%A7%E4%BD%8E%E6%89%A9%E5%B1%95%E6%80%A7%E5%BC%BA%E7%9A%84Android%E6%8D%A2%E8%82%A4%E6%A1%86%E6%9E%B6XSkinLoader%E7%9A%84%E7%94%A8%E6%B3%95%E5%8F%8A%E5%8E%9F%E7%90%86/
