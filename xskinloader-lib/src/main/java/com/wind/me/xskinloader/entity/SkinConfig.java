@@ -11,7 +11,9 @@ public class SkinConfig {
      */
     public static final String SKIN_XML_NAMESPACE = "http://schemas.android.com/android/skin";
 
-    /**界面元素支持换肤的属性*/
+    /**
+     * 界面元素支持换肤的属性
+     */
     public static final String ATTR_SKIN_ENABLE = "enable";
     public static final String SUPPORTED_ATTR_SKIN_LIST = "attrs";
 
@@ -30,6 +32,7 @@ public class SkinConfig {
      * 属性值对应的类型是drawable
      */
     public static final String RES_TYPE_NAME_DRAWABLE = "drawable";
+    public static final String RES_TYPE_NAME_MIPMAP = "mipmap";
 
     public static final String PREFERENCE_NAME = "xskin_loader_pref";
 

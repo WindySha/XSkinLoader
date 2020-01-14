@@ -8,7 +8,7 @@ import android.support.annotation.DrawableRes;
 
 /**
  * Created by xiawanli on 2018/1/10.
- *
+ * <p>
  * 换肤功能，替换资源管理接口
  */
 
@@ -26,4 +26,7 @@ public interface ISkinResourceManager {
 
     Drawable getDrawable(@DrawableRes int resId) throws Resources.NotFoundException;
 
+    Drawable getDrawableForMapmip(int attrValueRefId) throws Resources.NotFoundException;
+
+    ;
 }

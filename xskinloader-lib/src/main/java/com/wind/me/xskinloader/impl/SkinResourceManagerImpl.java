@@ -138,4 +138,28 @@ public class SkinResourceManagerImpl implements ISkinResourceManager {
         }
         return trueDrawable;
     }
+
+    @Override
+    public Drawable getDrawableForMapmip(int resId) throws Resources.NotFoundException {
+        Drawable originDrawable = mDefaultResources.getDrawable(resId);
+        if (mSkinPluginResources == null) {
+            return originDrawable;
+        }
+        String resName = mDefaultResources.getResourceEntryName(resId);
+
+        int trueResId = mSkinPluginResources.getIdentifier(resName, SkinConfig.RES_TYPE_NAME_MIPMAP, mSkinPluginPackageName);
+
+        Drawable trueDrawable;
+        try {
+            if (android.os.Build.VERSION.SDK_INT < 22) {
+                trueDrawable = mSkinPluginResources.getDrawable(trueResId);
+            } else {
+                trueDrawable = mSkinPluginResources.getDrawable(trueResId, null);
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+            trueDrawable = originDrawable;
+        }
+        return trueDrawable;
+    }
 }
