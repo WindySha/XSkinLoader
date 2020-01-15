@@ -25,6 +25,8 @@ public class ImageDrawableResDeployer implements ISkinResDeployer {
             drawable = new ColorDrawable(resource.getColor(skinAttr.attrValueRefId));
         } else if (SkinConfig.RES_TYPE_NAME_DRAWABLE.equals(skinAttr.attrValueTypeName)) {
             drawable = resource.getDrawable(skinAttr.attrValueRefId);
+        } else if (SkinConfig.RES_TYPE_NAME_MIPMAP.equals(skinAttr.attrValueTypeName)) {
+            drawable = resource.getDrawableForMapmip(skinAttr.attrValueRefId);
         }
         if (drawable != null) {
             ((ImageView) view).setImageDrawable(drawable);

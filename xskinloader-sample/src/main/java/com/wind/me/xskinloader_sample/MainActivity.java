@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextView;
     private ImageView mImageView;
+    private ImageView mImageMipMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.my_textView);
         mImageView = findViewById(R.id.my_imageView);
+        mImageMipMap = findViewById(R.id.my_image_mipmap);
 
         SkinManager.get().setImageDrawable(mImageView, R.drawable.my_image);
         SkinManager.get().setTextViewColor(mTextView, R.color.myTextColor);
@@ -51,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         //将assets目录下的皮肤文件拷贝到data/data/.../cache目录下
         String saveDir = getCacheDir().getAbsolutePath() + "/skins";
         String savefileName = "/skin1.skin";
-        String asset_dir = "skins/xskinloader-skin-apk-debug.apk";
+        String asset_dir = "skins/mipmap.apk";
+//        String asset_dir = "skins/xskinloader-skin-apk-debug.apk";
         File file = new File(saveDir + File.separator + savefileName);
         if (!file.exists()) {
             AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
